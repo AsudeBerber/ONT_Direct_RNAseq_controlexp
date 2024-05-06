@@ -16,7 +16,7 @@ rule gtf_to_fastafile:
 
 # rule combine_genome:
 #     input:
-#         "resources/referencegenome/........",
+#         "resources/referencegenome/convertedSIRVgtf_fasta.fasta",
 #         "resources/referencegenome/Saccharomyces_cerevisiae_YHR174W_mRNA_sequence.fa"
 #     output:
 #         "resources/referencegenome/combined_transcriptome.fa"
