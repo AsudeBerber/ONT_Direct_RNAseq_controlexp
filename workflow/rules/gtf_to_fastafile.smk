@@ -6,7 +6,7 @@ rule gtf_to_fastafile:
     conda:
         "../envs/minimap2.yaml"
     shell:
-        "gffread SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf -T -o convertedSIRVgtf_fasta.fasta"
+        "gffread SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf -T -o convertedSIRV.fasta"
 
 
 #Read alignment prior to quantification with NanoCount
