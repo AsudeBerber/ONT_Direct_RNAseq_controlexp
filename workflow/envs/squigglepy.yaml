@@ -1,0 +1,8 @@
+channels:
+  - conda-forge
+  - bioconda
+dependencies:
+  - numpy
+  - pip:
+    - squigglepy = 0.28-dev1
+    - pod5 = 0.3.10
