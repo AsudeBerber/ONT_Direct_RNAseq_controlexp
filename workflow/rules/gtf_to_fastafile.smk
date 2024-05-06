@@ -14,14 +14,14 @@ rule gtf_to_fastafile:
 #Reads should be aligned to a transcriptome reference using minimap2. We recommend using the -N 10 option to retain at least 10 secondary mappings.
 #by running the output in snakemake command line please just copy the output. snakemake -np output
 
-# rule combine_genome:
-#     input:
-#         "resources/referencegenome/convertedSIRVgtf_fasta.fasta",
-#         "resources/referencegenome/Saccharomyces_cerevisiae_YHR174W_mRNA_sequence.fa"
-#     output:
-#         "resources/referencegenome/combined_transcriptome.fa"
-#     shell:
-#         "cat {input} > {output}"
+rule combine_genome:
+    input:
+        "resources/referencegenome/convertedSIRVgtf_fasta.fasta",
+        "resources/referencegenome/Saccharomyces_cerevisiae_YHR174W_mRNA_sequence.fa"
+    output:
+        "resources/referencegenome/combined_transcriptome.fa"
+    shell:
+        "cat {input} > {output}"
 
 
 
