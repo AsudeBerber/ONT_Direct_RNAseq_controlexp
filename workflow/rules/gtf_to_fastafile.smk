@@ -1,7 +1,7 @@
 rule gtf_to_fastafile:
     input:
         "resources/SIRV_Set4_Norm_Sequences_20210507/SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf"
-        "resources/combined_reference_genome.fa"
+        "resources/referencegenome/combined_reference_genome.fa"
     output:
         "resources/referencegenome/convertedSIRVgtf_fasta.fasta"
     conda:
