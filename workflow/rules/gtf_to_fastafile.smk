@@ -5,7 +5,7 @@ rule gtf_to_fastafile:
     output:
         "resources/referencegenome/convertedSIRVgtf_fasta.fasta"
     conda:
-        "../envs/minimap2.yaml"
+        "../envs/gffread.yaml"
     shell:
         "gffread SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf -T -o convertedSIRV.fasta"
 
