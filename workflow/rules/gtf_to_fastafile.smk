@@ -7,7 +7,7 @@ rule gtf_to_fastafile:
     conda:
         "../envs/gffread.yaml"
     shell:
-        "gffread SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf combined_reference_genome.fa -T -o convertedSIRV.fasta"
+        "gffread SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf combined_reference_genome.fa -T -o convertedSIRVgtf_fasta.fasta"
 
 
 #Read alignment prior to quantification with NanoCount
