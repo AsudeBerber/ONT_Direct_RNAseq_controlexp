@@ -33,4 +33,4 @@ rule get_transcriptome:
     conda:
         "../envs/minimap2.yaml"
     shell:
-        "minimap2 -t 4 -ax map-ont -N 10 transcriptome.fasta reads.fastq | samtools view -bh > transcriptome.bam"
+        "minimap2 -t 4 -ax map-ont -N 10 {input.bam} | samtools view -bh > {output}
