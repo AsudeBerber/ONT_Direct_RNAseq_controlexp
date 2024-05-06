@@ -6,4 +6,4 @@ rule pod5_plot:
     conda:
         "../envs/squigglepy.yaml"
     shell:
-        "python3 ../scripts/Direct_RNA_seq_ONT_vis.py {input} arg1 arg2 arg3 {output}"
+        "python3 /scripts/Direct_RNA_seq_ONT_vis.py {input} arg1 arg2 arg3 {output}"
