@@ -12,7 +12,7 @@ rule gtf_to_fastafile:
 
 #Read alignment prior to quantification with NanoCount
 #Reads should be aligned to a transcriptome reference using minimap2. We recommend using the -N 10 option to retain at least 10 secondary mappings.
-
+#by running the output in snakemake command line please just copy the output. snakemake -np output
 
 # rule combine_genome:
 #     input:
