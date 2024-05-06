@@ -1,6 +1,7 @@
 rule gtf_to_fastafile:
     input:
         "resources/SIRV_Set4_Norm_Sequences_20210507/SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf"
+        "resources/combined_reference_genome.fa"
     output:
         "resources/referencegenome/convertedSIRVgtf_fasta.fasta"
     conda:
@@ -28,7 +29,7 @@ rule get_transcriptome:
     input:
         bam = "resources/basecalls/basecalls.bam"
     output:
-
+        "resources/referencegenome/transcriptome.bam"
     conda:
         "../envs/minimap2.yaml"
     shell:
