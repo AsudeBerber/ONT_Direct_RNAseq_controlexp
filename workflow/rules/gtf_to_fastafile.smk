@@ -25,12 +25,12 @@ rule combine_transcriptome:
 
 
 
-# rule get_transcriptome:
-#     input:
-#         bam = "resources/basecalls/basecalls.bam"
-#     output:
-#         "resources/referencegenome/transcriptome.bam"
-#     conda:
-#         "../envs/minimap2.yaml"
-#     shell:
-#         "minimap2 -t 4 -ax map-ont -N 10 transcriptome.fasta reads.fastq | samtools view -bh > aligned_reads.bam"
+rule get_transcriptome:
+    input:
+        bam = "resources/basecalls/basecalls.bam"
+    output:
+        "resources/referencegenome/transcriptome.bam"
+    conda:
+        "../envs/minimap2.yaml"
+    shell:
+        "minimap2 -t 4 -ax map-ont -N 10 transcriptome.fasta reads.fastq | samtools view -bh > transcriptome.bam"
