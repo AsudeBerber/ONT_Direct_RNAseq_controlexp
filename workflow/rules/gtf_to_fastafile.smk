@@ -1,13 +1,13 @@
 rule gtf_to_fastafile:
     input:
-        "resources/SIRV_Set4_Norm_Sequences_20210507/SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf"
-        "resources/referencegenome/combined_reference_genome.fa"
+        gtf = "resources/SIRV_Set4_Norm_Sequences_20210507/SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf",
+        fa = "resources/referencegenome/combined_reference_genome.fa"
     output:
         "resources/referencegenome/convertedSIRVgtf_fasta.fasta"
     conda:
         "../envs/gffread.yaml"
     shell:
-        "gffread SIRV_ERCC_longSIRV_multi-fasta_20210507.gtf combined_reference_genome.fa -T -o convertedSIRVgtf_fasta.fasta"
+        "gffread {input.gtf} {input.fa} -T -o {output}"
 
 
 #Read alignment prior to quantification with NanoCount
