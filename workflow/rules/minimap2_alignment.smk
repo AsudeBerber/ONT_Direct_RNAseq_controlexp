@@ -35,5 +35,4 @@ rule minimap2_align_txome:
 
 #snakemake --cores 8 --use-conda resources/alignments/aligned.bam
 #in order to run it (actual)
-
-#-np is just a trial run 
+#-np is just a trial run
