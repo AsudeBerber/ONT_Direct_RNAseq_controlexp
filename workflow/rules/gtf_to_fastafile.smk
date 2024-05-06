@@ -14,23 +14,23 @@ rule gtf_to_fastafile:
 #Reads should be aligned to a transcriptome reference using minimap2. We recommend using the -N 10 option to retain at least 10 secondary mappings.
 
 
-rule combine_genome:
-    input:
-        "resources/referencegenome/.........",
-        "resources/referencegenome/Saccharomyces_cerevisiae_YHR174W_mRNA_sequence.fa"
-    output:
-        "resources/referencegenome/combined_transcriptome.fa"
-    shell:
-        "cat {input} > {output}"
+# rule combine_genome:
+#     input:
+#         "resources/referencegenome/........",
+#         "resources/referencegenome/Saccharomyces_cerevisiae_YHR174W_mRNA_sequence.fa"
+#     output:
+#         "resources/referencegenome/combined_transcriptome.fa"
+#     shell:
+#         "cat {input} > {output}"
 
 
 
-rule get_transcriptome:
-    input:
-        bam = "resources/basecalls/basecalls.bam"
-    output:
-        "resources/referencegenome/transcriptome.bam"
-    conda:
-        "../envs/minimap2.yaml"
-    shell:
- #       "minimap2 -t 4 -ax map-ont -N 10 transcriptome.fasta reads.fastq | samtools view -bh > aligned_reads.bam"
+# rule get_transcriptome:
+#     input:
+#         bam = "resources/basecalls/basecalls.bam"
+#     output:
+#         "resources/referencegenome/transcriptome.bam"
+#     conda:
+#         "../envs/minimap2.yaml"
+#     shell:
+#         "minimap2 -t 4 -ax map-ont -N 10 transcriptome.fasta reads.fastq | samtools view -bh > aligned_reads.bam"
