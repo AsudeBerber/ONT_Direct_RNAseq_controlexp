@@ -7,7 +7,7 @@ rule gtf_to_fastafile:
     conda:
         "../envs/gffread.yaml"
     shell:
-        "gffread {input.gtf} {input.fa} -T -o {output}"
+        "gffread -w {output} -g {input.fa} {input.gtf}"
 
 
 #Read alignment prior to quantification with NanoCount
