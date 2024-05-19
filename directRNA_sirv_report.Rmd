@@ -1,0 +1,118 @@
+---
+title: "directRNA_sirv"
+author: "Asude Berber"
+date: "`r Sys.Date()`"
+output:
+    html_document:
+        toc: true
+        toc_float: true
+        toc_depth: 3
+        fig_caption: false
+        dev: "svg"
+editor_options:
+    chunk_output_type: console
+---
+
+```{r knitr_setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = FALSE,
+  message = FALSE,
+  warning = FALSE,
+  cache = FALSE,
+  out.width = 800)
+```
+
+
+```{r}
+library(readr)
+library(readxl)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+
+```{r data_import}
+counts <- read_tsv("data/txome_counts.tsv", show_col_types = FALSE)
+
+ERCC <- read_xlsx(
+  "data/SIRV_Set4_Norm_sequence-design-overview_20210507a.xlsx",
+  sheet = "ERCC",
+  range = "C6:F97",
+  col_names = c("gene_bank", "subgroup", "stock", "conc_amol")) %>% 
+  select(gene_bank, conc_amol) %>% 
+  left_join(
+    read_xlsx(
+      "data/SIRV_Set4_Norm_sequence-design-overview_20210507a.xlsx",
+      sheet = "ERCC",
+      range = "C6:I97",
+      col_names = c("gene_bank", "subgroup", "stock", "conc_amol", "Mw", "conc_ng", "length")) %>% 
+    select(gene_bank, length),
+  by = join_by(gene_bank))
+
+```
+
+
+```{r ercc}
+mod1 <- ERCC %>% 
+  left_join(counts, by = join_by(gene_bank == transcript_name)) %>% 
+  lm(est_count ~ conc_amol, data = .)
+
+mod2 <- ERCC %>% 
+  left_join(counts, by = join_by(gene_bank == transcript_name)) %>% 
+  lm(log1p(est_count) ~ log10(conc_amol), data = .)
+
+
+
+ERCC %>% 
+  left_join(counts, by = join_by(gene_bank == transcript_name)) %>% 
+  ggplot(aes(conc_amol, est_count)) +
+  xlab("c [amol/µl]") +
+  ylab("counts") +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  scale_x_log10() +
+  scale_y_continuous(transform = "log1p")
+
+ERCC %>% 
+  left_join(counts, by = join_by(gene_bank == transcript_name)) %>%
+  filter(conc_amol > 1) %>% 
+  ggplot(aes(log10(conc_amol), log1p(est_count))) +
+  xlab("c[amol/µl]") +
+  ylab("counts") +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  geom_smooth(colour = "red") +
+  scale_x_log10() +
+  scale_y_continuous(transform = "log1p")
+```
+
+
+
+```{r data_import2}
+longSIRV <-  read_xlsx(
+  "data/SIRV_Set4_Norm_sequence-design-overview_20210507a.xlsx",
+  sheet = "longSIRV",
+  range = "B6:H20",
+  col_names = c("long_SIRV_ID", "", "", "conc_amol", "Mw(g/mol)", "conc(ng/µl)", "length")) %>% 
+  select(long_SIRV_ID, length)
+```
+
+```{r longSIRV}
+longSIRV %>% 
+  left_join(counts, by = join_by(long_SIRV_ID == transcript_name)) %>% 
+  ggplot(aes(length, log1p(est_count))) +
+  xlab("Length(nt)") +
+  ylab("counts") +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  geom_smooth(colour = "red")
+  scale_y_continuous(transform ="log1p")
+```
+
+```{r longSIRV}
+LongSIRV_mod <- longSIRV %>% 
+  left_join(counts, by = join_by(long_SIRV_ID == transcript_name)) %>% 
+  lm(log1p(est_count) ~ length, data = .)
+```
+
